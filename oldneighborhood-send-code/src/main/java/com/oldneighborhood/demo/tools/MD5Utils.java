@@ -1,10 +1,14 @@
 package com.oldneighborhood.demo.tools;
 
 import java.security.MessageDigest;
-import java.util.Random;
 
+/**
+ * @ClassName: MD5Utils
+ * @Description: 加密
+ * @author user005
+ * @date 2018年5月2日
+ */
 public class MD5Utils {
-
 	public  static  String getMD5Code(String message){  
         String md5Result="";  
         try{  
@@ -28,7 +32,7 @@ public class MD5Utils {
         StringBuffer md5Result =new StringBuffer();  
         //把数组每一字节换成换成16进制连成md5字符串  
         int digital;  
-        for (int i=0;i<bytes.length;i++){  
+        for (int i=0; i<bytes.length; i++){  
 
 
             digital=bytes[i];  

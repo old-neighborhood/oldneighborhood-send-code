@@ -1,36 +1,27 @@
 package com.oldneighborhood.demo.tools;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+@Service
 public class SendMsg {
-	public static void sendMsg(String phones,String randomNum) {  
-		String content = "【签名】尊敬的用户，您的验证码为" + randomNum + "，请在10分钟内输入。请勿告诉其他人!";
-        try {  
-        	
-            content = java.net.URLEncoder.encode(content,"utf-8");  
-            System.out.println(content);  
-        } catch (UnsupportedEncodingException e) {  
-            // TODO Auto-generated catch block  
-            e.printStackTrace();  
-        }  
-    //短信接口URL提交地址  
-    String url = "https://api.dingdongcloud.com/v1/sms/sendyzm?apikey=b46c4961aa875f626b7924aace0d53f7&mobile="+phones+"&content="+content;  
 
-    Map<String, String> params = new HashMap<String, String>();  
+	@Autowired
+	private JavaMailSender javaMailSender;
 
-    params.put("zh", "账号");  
-    params.put("mm", "密码");  
-    params.put("dxlbid", "短信类别编号");  
-    params.put("extno", "扩展编号");  
+	public String sendEmail(@RequestBody Map<String, Object> reqMap) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom("old_neighborhood<ren_blue@yeah.net>");
+		message.setTo(reqMap.get("email").toString());
+		message.setSubject(reqMap.get("subject").toString());
+		message.setText("老街的熟人/过客：\n\n您好，欢迎成为老街的一员。\n验证码：" + reqMap.get("code").toString() + "，记得在五分钟内完成验证噢。\n\n老街的守夜人");
+		javaMailSender.send(message);
+		return "success";
+	}
 
-    //手机号码，多个号码使用英文逗号进行分割  
-    params.put("hm", phones);  
-    //将短信内容进行URLEncoder编码  
-    params.put("nr", URLEncoder.encode(content));  
-
-    String str = HttpRequestUtil.getRequest(url, params);  
-} 
 }

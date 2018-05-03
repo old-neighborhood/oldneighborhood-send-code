@@ -6,16 +6,16 @@ public class CommonUtils {
 
 	public static String createRandomNum() {
 		// TODO Auto-generated method stub
-		
-		Random  d = new Random();
+
+		Random d = new Random();
 
 		String str = "";
 
-		for(int m=0;m<4;m++){
+		for (int m = 0; m < 6; m++) {
 
-		int num = d.nextInt(10);
+			int num = d.nextInt(10);
 
-		str += num+"";
+			str += num + "";
 
 		}
 		return str;
