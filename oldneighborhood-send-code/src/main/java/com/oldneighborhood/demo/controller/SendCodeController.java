@@ -7,16 +7,17 @@ import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oldneighborhood.demo.tools.CommonUtils;
 import com.oldneighborhood.demo.tools.MD5Utils;
 import com.oldneighborhood.demo.tools.SendMsg;
 
 
-@RestController
+@Controller
 public class SendCodeController {
 	
 	@Autowired
@@ -27,7 +28,7 @@ public class SendCodeController {
 	
 	@RequestMapping("/info")
 	public String defaultMsg() {
-		return "/sendcode";
+		return "info";
 	}
 	
 	/**
@@ -38,6 +39,7 @@ public class SendCodeController {
 	 * @throws
 	 */
 	@RequestMapping(value = "/sendMsg")
+	@ResponseBody
 	public String sendMsg(@RequestBody Map<String, Object> requestMap) {
 		//获取邮箱
 		String email = requestMap.get("email").toString();
@@ -72,6 +74,7 @@ public class SendCodeController {
 	 * @return String 
 	 */
 	@RequestMapping(value = "/validateCode")
+	@ResponseBody
 	public String validateCode(@RequestBody Map<String, Object> requestMap) {
 		
 		String requestHash = requestMap.get("hash").toString();
