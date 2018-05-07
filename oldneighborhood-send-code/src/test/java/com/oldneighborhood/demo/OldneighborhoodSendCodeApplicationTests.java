@@ -27,12 +27,12 @@ public class OldneighborhoodSendCodeApplicationTests {
 		System.out.println(sendCodeController.sendMsg(requestMap));
 	}
 	
-	@Test
-	public void validateCode() {
-		Map<String, Object> map = new HashMap<>();
-		map.put("time", "20180502192012");
-		map.put("code", "501810");
-		map.put("hash", "79528DC604AE9AF5C4EAEF2BCF127670");
-		System.out.println(sendCodeController.validateCode(map));
-	}
+//	@Test
+//	public void validateCode() {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("time", "20180502192012");
+//		map.put("code", "501810");
+//		map.put("hash", "79528DC604AE9AF5C4EAEF2BCF127670");
+//		System.out.println(sendCodeController.validateCode(map));
+//	}
 }

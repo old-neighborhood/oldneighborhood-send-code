@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.oldneighborhood.demo.tools.CommonUtils;
 import com.oldneighborhood.demo.tools.MD5Utils;
 import com.oldneighborhood.demo.tools.SendMsg;
+
+import net.sf.json.JSONObject;
 
 
 @Controller
@@ -63,7 +64,7 @@ public class SendCodeController {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("hash", hash);
 		resultMap.put("time", deadTime);
-		JSONObject json = new JSONObject(resultMap);
+		JSONObject json = JSONObject.fromObject(resultMap);
 //		System.out.println(json);
 		return json.toString();
 	}
